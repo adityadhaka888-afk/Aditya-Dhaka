@@ -1,0 +1,47 @@
+ 
+body{ background-image:url(Snapchat-2110768571.jpg);
+ background-repeat: repeat;
+  background-position: center;
+  background-size: cover;
+  color:aliceblue;}
+h1{color:red;
+text-align: center;
+line-height:normal;
+font-weight:900; }
+div{
+    border:2px solid purple;
+    height:50px;
+    background-color: rgb(90, 49, 90);
+}
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.container button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+h2{color:rgb(72, 204, 72)}
+ table { background-color: aquamarine;
+    color:blue;
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: lightblue;
+        }
+        h3{ color:rgb(42, 194, 199)}
+
+    
+
+        

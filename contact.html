@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz</title>
+   
+</head>
+<body> <h1 style="color:red;
+text-align: center;
+line-height:normal;
+font-weight:900;">Aditya dhaka
+           web</h1>
+    <hr>
+     <h3 style="color:rgb(42,194,199)">
+        If you want to know about these so click on it. 
+    </h3>
+    <div style="border:2px solid purple;
+    height:50px;
+    background-color: rgb(90, 49, 90);display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;" class="container"><button onclick="window.location.href='about.html'">
+        m.family
+        </button>
+        <button onclick="window.location.href='services.html'">
+        f.family
+        </button>
+        <button onclick="window.location.href='index.html'">
+        myself
+        </button></div>
+        
+        
+        
+
+<div style="max-width: 700px; margin: auto; background: white; padding: 20px; border-radius: 10px;">
+
+    <h1 style="color: red; text-align: center;">Quiz App</h1>
+
+    <form id="quizForm">
+        <div id="questions"></div>
+
+        <button type="submit"
+        style="background: blue; color: white; padding: 12px; width: 100%; border: none; border-radius: 5px; font-size: 18px; cursor: pointer;">
+            Submit Quiz
+        </button>
+    </form>
+
+    <div id="result"
+    style="display: none; margin-top: 20px; padding: 15px; border-radius: 8px;">
+    </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    q: "1. Who is most beautiful?",
+    options: ["Khushboo", "Mansi", "Anjali", "Ashish"],
+    answer: 4
+  },
+  {
+    q: "2. Who is most intelligent?",
+    options: ["Aditya", "Ankita", "Monika", "Ashish"],
+    answer: 2
+  },
+  {
+    q: "3. Who is most energetic?",
+    options: ["Lalit", "Sayo", "Mansi", "Ashish"],
+    answer: 4
+  },
+  {
+    q: "4. Who is most sharp-minded?",
+    options: ["Sayo", "Ashish", "Lalit", "Anjali"],
+    answer: 3
+  },
+  {
+    q: "5. Who has the most confusing attitude?",
+    options: ["Ankita", "Mansi", "Anjali", "Monika"],
+    answer: 2
+  },
+  {
+    q: "6. Who is the funniest?",
+    options: ["Ashish", "Ankita", "Sahiram", "Mansi"],
+    answer: 3
+  },
+  {
+    q: "7. Who is the laziest?",
+    options: ["Monika", "Ankita", "Ankita", "Lalit"],
+    answer: 4
+  },
+  {
+    q: "8. Who is the angriest person?",
+    options: ["Sayo", "Mansi", "Monika", "Ankita"],
+    answer: 2
+  },
+  {
+    q: "9. Who tells lies most often?",
+    options: ["Monika", "Ashish", "Sayo", "Khushboo"],
+    answer: 2
+  },
+  {
+    q: "10. What is the value of cos(π/3)?",
+    options: ["1", "Not defined", "5.63/87", "1/2"],
+    answer: 4
+  }
+];
+
+const questionsDiv = document.getElementById("questions");
+const form = document.getElementById("quizForm");
+const result = document.getElementById("result");
+
+// Display all questions and options
+questions.forEach((q, i) => {
+  const box = document.createElement("div");
+  box.style.marginBottom = "25px";
+  box.style.padding = "12px";
+  box.style.borderBottom = "1px solid #ddd";
+
+  const title = document.createElement("h3");
+  title.textContent = q.q;
+  box.appendChild(title);
+
+  q.options.forEach((option, j) => {
+    const label = document.createElement("label");
+    label.style.display = "block";
+    label.style.padding = "7px";
+    label.style.cursor = "pointer";
+
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "question" + i;
+    radio.value = j + 1;
+    radio.style.marginRight = "10px";
+
+    label.appendChild(radio);
+    label.appendChild(document.createTextNode(option));
+    box.appendChild(label);
+  });
+
+  questionsDiv.appendChild(box);
+});
+
+// Check answers and calculate marks
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    const selected = form.querySelector(
+      'input[name="question' + i + '"]:checked'
+    );
+
+    const box = questionsDiv.children[i];
+    const labels = box.querySelectorAll("label");
+
+    labels.forEach((label, j) => {
+      label.style.borderRadius = "5px";
+
+      if (j + 1 === q.answer) {
+        label.style.backgroundColor = "#d1fae5";
+      }
+    });
+
+    if (selected && Number(selected.value) === q.answer) {
+      score++;
+    } else {
+      const feedback = document.createElement("p");
+      feedback.style.color = "#dc2626";
+      feedback.style.fontWeight = "bold";
+      feedback.textContent = selected
+        ? "❌ Incorrect answer"
+        : "⚠️ Not answered";
+
+      box.appendChild(feedback);
+    }
+  });
+
+  const percentage = (score / questions.length) * 100;
+
+  result.style.display = "block";
+  result.style.backgroundColor = "#eef2ff";
+  result.style.color = "#222";
+
+  result.innerHTML = `
+    <h2 style="text-align:center">🏆 Quiz Result</h2>
+    <h3 style="text-align:center;color:blue">
+      Marks: ${score}/10
+    </h3>
+    <h3 style="text-align:center">
+      Percentage: ${percentage}%
+    </h3>
+    <p style="text-align:center">
+      ${percentage >= 80
+        ? "🌟 Excellent!"
+        : percentage >= 50
+        ? "👏 Good job!"
+        : "💪 Keep practicing!"}
+    </p>
+    <button type="button" id="restartBtn"
+      style="width:100%;padding:12px;background:blue;
+      color:white;border:none;border-radius:5px;cursor:pointer">
+      Restart Quiz
+    </button>
+  `;
+
+  form.querySelector('button[type="submit"]').disabled = true;
+
+  document.getElementById("restartBtn").onclick = function() {
+    form.reset();
+    result.style.display = "none";
+    questionsDiv.innerHTML = "";
+    form.querySelector('button[type="submit"]').disabled = false;
+
+    // Reload the page to start a fresh quiz
+    location.reload();
+  };
+
+  result.scrollIntoView({ behavior: "smooth" });
+});
+</script>
+</body>
+</html>
